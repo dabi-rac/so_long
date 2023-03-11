@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:35:06 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/11 10:35:09 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:06:50 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_game  *ft_init(void)
 
 int main(int ac, char **av)
 {   
-    t_game *game;
+    t_game  *game;
     
      if (ac != 2)
         return (0);
@@ -44,6 +44,7 @@ int main(int ac, char **av)
     printf("init ok\n");
     game->win = mlx_new_window(game->mlx, game->cols * 64, game->rows * 64, "So_long");
     printf("new window ok\n");
+    put_wall(game);
     mlx_loop(game->mlx);
     printf("loop ok\n"); 
 }

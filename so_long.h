@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:34:36 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/11 10:34:41 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/11 12:04:24 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,27 @@ typedef struct s_game
 	void	*escape;
 	void	*player;
 	void	*coin;
+    void    *reference;
     int     rows;
     int     cols;
+    void    *img;
 }       t_game;
+
 
 // typedef struct s_img 
 // {
-// 	void	*wall;
-// 	void	*escape;
-// 	void	*player;
-// 	void	*coin;
+//     t_game  *img;
+// 	void	*img_wall;
+// 	void	*img_escape;
+// 	void	*img_player;
+// 	void	*img_coin;
+//     void    *reference;
 // }       t_img;
 
 //libft_utils
 int	    ft_strlen(const char *s);
+void    put_wall(t_game *game);
+void    assign_sprite(t_game *game, t_game *img, char *str);
 //maps
 // int     check_form(t_game *game);
 // int     check_walls(t_game *game);
