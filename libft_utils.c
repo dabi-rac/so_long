@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:35:13 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/12 14:18:56 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:55:05 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ void 	put_sprites(t_game *game)
 			}
 			else if (game->map[i][j] == 'P')
 			{
+				game->posx = j;
+				game->posy = i;
+				printf("%d", j);
+				printf("%d", i);
 				assign_sprite_franchino(game, &game->imgP, game->reffranchino);
 				mlx_put_image_to_window(game->mlx, game->win, game->reffranchino, j * 64, i * 64);
 			}
@@ -107,4 +111,33 @@ void 	put_sprites(t_game *game)
 		}
 		i++;
 	}
+}
+
+int		ft_move(int keycode, t_game *game)
+{
+	int j = game->posx;
+	int i = game->posy;
+	printf("key pressed -> %d\n", keycode);
+	
+
+
+if (keycode == 13 || keycode == 126) {
+    if (i > 0 && game->map[i-1][j] != '1') {
+        game->map[i][j] = '0'; // Change current tile to '0'
+		printf("P tile before -> %c\n", game->map[i][j]);
+        i--; // Move up one row
+        game->map[i][j] = 'P'; // Change the tile above to 'P'
+		printf("P tile before -> %c\n", game->map[i][j]);
+    }
+}
+	// if (keycode == 13 || keycode == 126)
+	// {
+	// 	if(game->map[--i][j] !=1 )
+	// 	{
+	// 		printf("P tile before -> %c\n", game->map[i][j]);
+	// 		game->map[i++][j] = 'P';
+	// 		printf("P tile after -> %c\n", game->map[--i][j]);
+	// 	}
+	// }
+	return (0);
 }

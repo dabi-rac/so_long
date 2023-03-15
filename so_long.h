@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:34:36 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/12 14:19:37 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/15 14:34:20 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_game
     char    **map;
     void    *mlx;
     void    *win;
+    int     posx;
+    int     posy;
     // void	*wall;
 	// void	*escape;
 	// void	*player;
@@ -81,4 +83,5 @@ int     map_ok(t_game *game);
 int     read_map(char *av, t_game *game);
 //main
 t_game  *ft_init(void);
+int     ft_move(int keycode, t_game *game);
 #endif
