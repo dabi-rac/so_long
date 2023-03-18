@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 10:34:46 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/11 10:34:50 by dabi-rac         ###   ########.fr       */
+/*   Created: 2023/03/18 13:06:51 by dabi-rac          #+#    #+#             */
+/*   Updated: 2023/03/18 13:07:51 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int check_char(t_game *game)
                 game->obj.coin++;
             else if (game->map[j][i] == 'E')
 			    game->obj.escape++; 
+			else if (game->map[j][i] == 'N')
+			    game->obj.enemy++; 
 			else if (game->map[j][i] != '0' && game->map[j][i] != '1')
 				return (0);
 			i++;
@@ -107,7 +109,7 @@ int map_ok(t_game *game)
 			printf("check walls ok\n");
             if (check_char(game) == 1)
 			{
-				printf("tuttapporn ofrat\n");
+				printf("tuttaapost ofrat\n");
                 return (1);
         	}
 		}

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 10:34:36 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/15 14:34:20 by dabi-rac         ###   ########.fr       */
+/*   Created: 2023/03/18 13:06:31 by dabi-rac          #+#    #+#             */
+/*   Updated: 2023/03/18 13:06:33 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
-# include "./minilibx/mlx.h"
+# include <mlx.h>
 
 typedef struct s_obj 
 {
@@ -31,57 +31,33 @@ typedef struct s_game
 {
 	t_obj	obj;
     char    **map;
+    char    *img;
     void    *mlx;
     void    *win;
+    void    *ref_floor;
+    void    *ref_wall;
+    void    *ref_escape;
+    void    *ref_player;
+    void    *ref_coin;
+    void    *ref_enemy;
     int     posx;
     int     posy;
-    // void	*wall;
-	// void	*escape;
-	// void	*player;
-	// void	*coin;
-    void    *refwall;
-    void    *reffloor;
-    void    *reffranchino;
-    void    *refsuppli;
-    void    *reftermini;
     int     rows;
     int     cols;
-    void    *img1;
-    void    *img0;
-    void    *imgP;
-    void    *imgc;
-    void    *imge;
+    int     moves;
 }       t_game;
-
-
-// typedef struct s_img 
-// {
-//     t_game  *img;
-// 	void	*img_wall;
-// 	void	*img_escape;
-// 	void	*img_player;
-// 	void	*img_coin;
-//     void    *reference;
-// }       t_img;
 
 //libft_utils
 int	    ft_strlen(const char *s);
-void    assign_sprite_wall(t_game *game, t_game *img0, char *str);
-void	assign_sprite_floor(t_game *game, t_game *img1, char *str);
-void	assign_sprite_franchino(t_game *game, t_game *img1, char *str);
-void	assign_sprite_suppli(t_game *game, t_game *imgc, char *str);
-void	assign_sprite_termini(t_game *game, t_game *imge, char *str);
-void    put_sprites(t_game *game);
 //maps
-// int     check_form(t_game *game);
-// int     check_walls(t_game *game);
-// int     check_char(t_game *game);
 int     map_error(int ac, char *av);
 int     map_ok(t_game *game);
 //map_read
-// char	**ft_split(char const *s, char c);
 int     read_map(char *av, t_game *game);
+//map_popolation
+void	draw_map(t_game *game);
+void	upload_image(t_game *game);
+int	    ft_move(int keycode, t_game *game);
 //main
 t_game  *ft_init(void);
-int     ft_move(int keycode, t_game *game);
 #endif

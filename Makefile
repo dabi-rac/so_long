@@ -1,39 +1,49 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/11 10:35:01 by dabi-rac          #+#    #+#              #
-#    Updated: 2023/03/11 10:35:03 by dabi-rac         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = so_long
-
-SRC = maps.c map_read.c main.c libft_utils.c \
-
-OBJ = $(SRC.c=.o)
-
-LIBRARY := -Lminilibx -lmlx -framework OpenGL -framework AppKit
-MINILIBX := minilibx/
+MINILIBX_PATH	=	./minilibx
+MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
 
 
-FLAG = -Wall -Werror -Wextra
-CC = gcc
+SOURCES_FILES	=	main.c\
+					libft_utils.c\
+					set_map.c\
+					map_read.c\
+					maps.c\
+					player_move.c\
 
-all : 
-		make -C $(MINILIBX)
-	$(CC) $(CFLAGS) $(SRC) $(LIBRARY) -o $(NAME) -lz -g
+HEADER			=	./so_long.h
 
-clean: 
-	make clean -C $(MINILIBX)
-	rm -f $(OBJ)
-	
-fclean:	clean
-	rm -f $(NAME)
+OBJECTS			= 	$(SOURCES_FILES:.c=.o)
 
-re:	fclean all clean
+NAME			=	so_long
 
-.PHONY: all clean fclean re
+CC				=	gcc
+
+RM				=	rm -f
+
+MLX				=	./libmlx.dylib
+
+CFLAGS			=	-Wall -Wextra -Werror
+
+MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+
+%.o: %.c
+	$(CC) ${CFLAGS} -Imlx -c $< -o $@
+
+all:			$(NAME)
+
+$(NAME):	$(OBJECTS)
+				$(CC) $(OBJECTS) $(MLX_FLAGS) -o $(NAME)
+
+$(MINILIBX):
+				make -C $(MINILIBX_PATH)
+
+clean:
+				${RM} ${OBJECTS}
+				make clean -C ${MINILIBX_PATH}
+
+fclean:			clean
+					rm -f $(NAME)
+					rm -f $(MINILIBX)
+
+re:				fclean all
+
+.PHONY:			all clean re
