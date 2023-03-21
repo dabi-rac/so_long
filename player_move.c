@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:06:45 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/18 13:06:46 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:58:08 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		ft_move(int keycode, t_game *game)
 	printf("numero mosse:%d\n", game->moves);
 	if (keycode == 53)
 		exit(2);
+	// mlx_string_put(game->mlx, game->win,100, 100, 0xFFFFFF, "numero mosse");
 	ft_move_up(keycode, game);
 	ft_move_down(keycode, game);
 	ft_move_right(keycode, game);

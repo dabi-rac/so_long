@@ -6,11 +6,16 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:07:11 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/18 13:07:12 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:59:34 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int    ft_close(void)
+{
+    exit(2);
+}
 
 t_game  *ft_init(void)
 {
@@ -46,6 +51,7 @@ int main(int ac, char **av)
     printf("new window ok\n");
     draw_map(game);
     mlx_hook(game->win, 2, 1L << 0, ft_move, game);
+    mlx_hook(game->win, 17, 1L << 2, ft_close, game);
     mlx_loop(game->mlx);
     printf("loop ok\n"); 
 }

@@ -58,6 +58,7 @@ int     read_map(char *av, t_game *game);
 void	draw_map(t_game *game);
 void	upload_image(t_game *game);
 int	    ft_move(int keycode, t_game *game);
+char	*ft_itoa(int n);
 //main
 t_game  *ft_init(void);
 #endif

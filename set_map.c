@@ -6,7 +6,7 @@
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:06:37 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/18 13:06:41 by dabi-rac         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:20:47 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	draw_map(t_game *game)
 		}
 		i++;
 	}
+	mlx_string_put(game->mlx, game->win, 10, 10, 0x000000, "numero mosse :");
+	mlx_string_put(game->mlx, game->win, 150, 10, 0x000000, ft_itoa(game->moves));
 }
 
