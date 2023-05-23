@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 13:06:55 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/18 13:06:56 by dabi-rac         ###   ########.fr       */
+/*   Created: 2023/03/08 19:59:22 by fcarlucc          #+#    #+#             */
+/*   Updated: 2023/05/22 11:45:33 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,25 @@ static char	**ft_split(char const *s, char c)
 
 int	read_map(char *av, t_game *game)
 {
-    char    *str;
-    int     fd;
-    
-    fd = open(av, O_RDONLY);
+	char	*str;
+	int		fd;
+
+	fd = open(av, O_RDONLY);
 	if (fd == -1)
-       return (0);
-	str = malloc(sizeof(char) * 100);
-    read(fd, str, 100);
+		return (0);
+	str = malloc(sizeof(char) * 1000);
+	read(fd, str, 1000);
 	game->map = ft_split(str, '\n');
-	free(str);
 	if (!game->map)
 		exit(0);
-	while(game->map[game->rows])
+	while (game->map[game->rows])
 	{
-	printf("%s\n", game->map[game->rows]);
 		game->cols = 0;
-		while(game->map[game->rows][game->cols])
+		while (game->map[game->rows][game->cols])
 			game->cols++;
 		game->rows++;
 	}
-	printf("%dp\n%dp\n",game->cols,game->rows);
 	close(fd);
+	free(str);
 	return (1);
 }

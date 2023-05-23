@@ -5,53 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabi-rac <dabi-rac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 13:07:11 by dabi-rac          #+#    #+#             */
-/*   Updated: 2023/03/21 18:59:34 by dabi-rac         ###   ########.fr       */
+/*   Created: 2023/03/08 17:40:45 by fcarlucc          #+#    #+#             */
+/*   Updated: 2023/05/23 23:15:39 by dabi-rac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int    ft_close(void)
+void	free_map(t_game *game)
 {
-    exit(2);
+	int	i;
+
+	i = 0;
+	while (game->map[i])
+	{
+		free(game->map[i]);
+		i++;
+	}
 }
 
-t_game  *ft_init(void)
+int	ft_close(t_game *game)
 {
-	t_game	*game;
-    
-	game = malloc(sizeof(t_game));
+	free_map(game);
+	exit(0);
+}
+
+void	ft_init(t_game *game)
+{
 	game->obj.escape = 0;
-    game->obj.enemy = 0;
-    game->obj.coin = 0;
-    game->obj.player = 0;
-    game->moves = 0;
-	return (game);
+	game->obj.enemy = 0;
+	game->obj.coin = 0;
+	game->obj.player = 0;
+	game->flag = 0;
+	game->time = 0;
+	game->mvs = 0;
 }
 
-int main(int ac, char **av)
-{   
-    t_game *game;
-    
-     if (ac != 2)
-        return (0);
-    game = ft_init();
-    read_map(av[1], game);
-    map_error(2, av[1]);
-    if (map_ok(game) == 0)
-    {
-        perror("mappa non valida");
-        exit (0);
-    }
-    game->mlx = mlx_init();
-    upload_image(game);
-    printf("init ok\n");
-    game->win = mlx_new_window(game->mlx, game->cols * 64, game->rows * 64, "So_long");
-    printf("new window ok\n");
-    draw_map(game);
-    mlx_hook(game->win, 2, 1L << 0, ft_move, game);
-    mlx_hook(game->win, 17, 1L << 2, ft_close, game);
-    mlx_loop(game->mlx);
-    printf("loop ok\n"); 
+void	upload_image(t_game *game)
+{
+	int	size;
+
+	game->ref_wall = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/wall.xpm", &size, &size);
+	game->ref_floor = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/floor.xpm", &size, &size);
+	game->ref_escape = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/escape.xpm", &size, &size);
+	game->ref_player = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/player.xpm", &size, &size);
+	game->ref_coin = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/coin.xpm", &size, &size);
+	game->ref_enemy = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/enemy.xpm", &size, &size);
+	game->ref_enemy1 = \
+	mlx_xpm_file_to_image(game->mlx, "sprites/enemy1.xpm", &size, &size);
+}
+
+int	main(int ac, char **av)
+{
+	t_game	game;
+
+	if (ac != 2)
+		return (0);
+	ft_init(&game);
+	read_map(av[1], &game);
+	map_error(2, av[1]);
+	if (map_ok(&game) == 0)
+	{
+		write(1, "mappa non valida\n", 17);
+		exit (1);
+	}
+	game.mlx = mlx_init();
+	upload_image(&game);
+	game.win = mlx_new_window(game.mlx, game.cols * 64, game.rows * 64, \
+			"So_long dabi-rac");
+	draw_map(&game);
+	mlx_hook(game.win, 2, 1L << 0, ft_move, &game);
+	mlx_hook(game.win, 17, 1L << 2, ft_close, &game);
+	mlx_loop(game.mlx);
 }
